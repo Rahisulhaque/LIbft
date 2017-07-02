@@ -1,33 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strstr.c                                        :+:      :+:    :+:   */
+/*   ft_lstdel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rhaque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/01 17:48:04 by rhaque            #+#    #+#             */
-/*   Updated: 2017/07/01 17:48:07 by rhaque           ###   ########.fr       */
+/*   Created: 2017/07/01 18:48:01 by rhaque            #+#    #+#             */
+/*   Updated: 2017/07/01 18:48:05 by rhaque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strstr(const char *big, const char *little)
+void	ft_lstdel(t_list **alst, void (*del)(void *, size_t))
 {
-	int i;
-	int k;
+	t_list *node;
+	t_list *n_alst;
 
-	i = 0;
-	if (little[0] == '\0')
-		return (char*)(big);
-	while (big[i] != '\0')
+	n_alst = *alst;
+	while (n_alst != NULL)
 	{
-		k = 0;
-		while (big[i + k] == little[k] && little[k] != '\0')
-			k++;
-		if (little[k] == '\0')
-			return (char*)(big + i);
-		i++;
+		node = n_alst->next;
+		del(n_alst, n_alst->content_size);
+		n_alst = node;
 	}
-	return (NULL);
+	*alst = NULL;
 }

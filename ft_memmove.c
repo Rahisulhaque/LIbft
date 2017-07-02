@@ -1,33 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strstr.c                                        :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rhaque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/01 17:48:04 by rhaque            #+#    #+#             */
-/*   Updated: 2017/07/01 17:48:07 by rhaque           ###   ########.fr       */
+/*   Created: 2017/07/01 18:59:27 by rhaque            #+#    #+#             */
+/*   Updated: 2017/07/01 18:59:29 by rhaque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strstr(const char *big, const char *little)
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	int i;
-	int k;
+	unsigned char	*dest;
+	unsigned char	*source;
+	size_t			i;
 
-	i = 0;
-	if (little[0] == '\0')
-		return (char*)(big);
-	while (big[i] != '\0')
-	{
-		k = 0;
-		while (big[i + k] == little[k] && little[k] != '\0')
-			k++;
-		if (little[k] == '\0')
-			return (char*)(big + i);
-		i++;
-	}
-	return (NULL);
+	dest = (unsigned char*)dst;
+	source = (unsigned char*)src;
+	i = -1;
+	if (source < dest)
+		while (len-- > 0)
+			*(dest + len) = *(source + len);
+	else
+		while (++i < len)
+			*(dest + i) = *(source + i);
+	return (dst);
 }
