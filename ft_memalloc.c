@@ -1,33 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strstr.c                                        :+:      :+:    :+:   */
+/*   ft_memalloc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rhaque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/01 17:48:04 by rhaque            #+#    #+#             */
-/*   Updated: 2017/07/01 17:48:07 by rhaque           ###   ########.fr       */
+/*   Created: 2017/07/01 18:50:41 by rhaque            #+#    #+#             */
+/*   Updated: 2017/07/01 18:50:43 by rhaque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strstr(const char *big, const char *little)
+void	*ft_memalloc(size_t size)
 {
-	int i;
-	int k;
+	unsigned char *mem;
 
-	i = 0;
-	if (little[0] == '\0')
-		return (char*)(big);
-	while (big[i] != '\0')
-	{
-		k = 0;
-		while (big[i + k] == little[k] && little[k] != '\0')
-			k++;
-		if (little[k] == '\0')
-			return (char*)(big + i);
-		i++;
-	}
-	return (NULL);
+	mem = (unsigned char*)malloc(sizeof(size_t) * size);
+	if (mem == NULL)
+		return (NULL);
+	ft_bzero(mem, size);
+	return (mem);
 }

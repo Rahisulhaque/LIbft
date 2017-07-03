@@ -1,33 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strstr.c                                        :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rhaque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/01 17:48:04 by rhaque            #+#    #+#             */
-/*   Updated: 2017/07/01 17:48:07 by rhaque           ###   ########.fr       */
+/*   Created: 2017/07/01 19:04:42 by rhaque            #+#    #+#             */
+/*   Updated: 2017/07/01 19:04:45 by rhaque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strstr(const char *big, const char *little)
+void	ft_putnbr(int n)
 {
-	int i;
-	int k;
+	char num;
 
-	i = 0;
-	if (little[0] == '\0')
-		return (char*)(big);
-	while (big[i] != '\0')
+	if (n == -2147483648)
+		ft_putstr("-2147483648");
+	else
 	{
-		k = 0;
-		while (big[i + k] == little[k] && little[k] != '\0')
-			k++;
-		if (little[k] == '\0')
-			return (char*)(big + i);
-		i++;
+		if (n < 0)
+		{
+			write(1, "-", 1);
+			n = n * -1;
+		}
+		if (n > 9)
+		{
+			ft_putnbr(n / 10);
+			ft_putnbr(n % 10);
+		}
+		else
+		{
+			num = n + '0';
+			write(1, &num, 1);
+		}
 	}
-	return (NULL);
 }

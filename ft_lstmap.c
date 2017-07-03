@@ -1,36 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rhaque <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/01 17:32:31 by rhaque            #+#    #+#             */
-/*   Updated: 2017/07/01 17:32:37 by rhaque           ###   ########.fr       */
+/*   Created: 2017/07/01 18:49:41 by rhaque            #+#    #+#             */
+/*   Updated: 2017/07/01 18:49:44 by rhaque           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(const char *s1)
+t_list	*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
 {
-	int		i;
-	char	*s2;
+	t_list *list;
+	t_list *node_1;
+	t_list *node_2;
 
-	i = 0;
-	s2 = (char*)malloc(sizeof(char) * ft_strlen(s1) + 1);
-	if (s2 == NULL)
+	if (!lst)
 		return (NULL);
-	if (s1[0] == '\0')
+	node_1 = f(lst);
+	list = ft_lstnew(node_1->content, node_1->content_size);
+	node_2 = list;
+	lst = lst->next;
+	while (lst != NULL)
 	{
-		s2[0] = '\0';
-		return (s2);
+		node_1 = f(lst);
+		if (!(node_2->next = ft_lstnew(node_1->content, node_1->content_size)))
+			return (NULL);
+		node_2 = node_2->next;
+		lst = lst->next;
 	}
-	while (s1[i] != '\0')
-	{
-		s2[i] = s1[i];
-		i++;
-	}
-	s2[i] = '\0';
-	return (s2);
+	return (list);
 }
