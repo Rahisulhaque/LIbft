@@ -16,6 +16,8 @@
 # include <string.h>
 # include <stdlib.h>
 
+# define ALPHANUMS	"0123456789abcdefghijklmnopqrstuvwxyz"
+
 typedef struct		s_list
 {
 	void			*content;
